@@ -1,37 +1,39 @@
-on:
-  pull_request:
-    types: [closed]
-jobs:
-  job1:
-    runs-on: ubuntu-latest
-    if: ${{ github.event.pull_request.merged == true }}
-    steps:
-      - name: Get source branch
-        run: echo "The source branch is ${{ github.head_ref }}"
-
 # on:
 #   pull_request:
 #     types: [closed]
-
 # jobs:
-#   build:
+#   job1:
 #     runs-on: ubuntu-latest
+#     if: ${{ github.event.pull_request.merged == true }}
 #     steps:
-#       - name: display branch name
-#         run: | 
-#           echo ${{ github.ref }}
-#           echo ${{ github.base_ref }}
+#       - name: Get source branch
+#         run: echo "The source branch is ${{ github.head_ref }}"
+
+on:
+  pull_request:
+    types: [closed]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      SOURCE_BRANCH: ${{ github.head_ref }}
+    steps:
+      - name: display branch name
+        run: | 
+          echo ${{ github.ref }}
+          echo ${{ github.base_ref }}
         
-#       - uses: actions/checkout@v2
-#       - name: Bump minor version and push tag
-#         if: startsWith(github.ref, 'refs/heads/feature/')
-#         uses: leonsteinhaeuser/git-tag-bump@v1.0.0
-#         with:
-#           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#           bump-type: minor
-#       - name: Bump patch version and push tag
-#         if: startsWith(github.ref, 'refs/heads/bugfix/')
-#         uses: leonsteinhaeuser/git-tag-bump@v1.0.0
-#         with:
-#           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#           bump-type: patch
+      - uses: actions/checkout@v2
+      - name: Bump minor version and push tag
+        if: startsWith(env.SOURCE_BRANCH, 'feature/')
+        uses: leonsteinhaeuser/git-tag-bump@v1.0.0
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          bump-type: minor
+      - name: Bump patch version and push tag
+        if: startsWith(env.SOURCE_BRANCH, 'bugfix/')
+        uses: leonsteinhaeuser/git-tag-bump@v1.0.0
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          bump-type: patch
