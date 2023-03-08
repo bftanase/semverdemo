@@ -24,7 +24,9 @@ jobs:
           echo ${{ github.ref }}
           echo ${{ github.base_ref }}
         
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
       - name: Bump minor version and push tag
         if: startsWith(env.SOURCE_BRANCH, 'feature/')
         uses: leonsteinhaeuser/git-tag-bump@v1.0.0
