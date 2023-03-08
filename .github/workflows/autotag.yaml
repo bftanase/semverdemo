@@ -1,0 +1,23 @@
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Bump minor version and push tag
+        if: startsWith(github.ref, 'refs/heads/feature/')
+        uses: git-tag-bump@v1.0.0
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          config-file-path: .github/git-tag-bump.yml
+          bump-type: minor
+      - name: Bump patch version and push tag
+        if: startsWith(github.ref, 'refs/heads/bugfix/')
+        uses: git-tag-bump@v1.0.0
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          config-file-path: .github/git-tag-bump.yml
+          bump-type: patch
