@@ -29,11 +29,9 @@ jobs:
         if: startsWith(env.SOURCE_BRANCH, 'feature/')
         uses: leonsteinhaeuser/git-tag-bump@v1.0.0
         with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          bump-type: minor
+          args: "--bump minor"
       - name: Bump patch version and push tag
         if: startsWith(env.SOURCE_BRANCH, 'bugfix/')
         uses: leonsteinhaeuser/git-tag-bump@v1.0.0
         with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          bump-type: patch
+          args: "--bump patch"
