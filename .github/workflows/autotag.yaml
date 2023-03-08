@@ -7,7 +7,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: display branch name
-        run: echo ${{ github.ref }}
+        run: | 
+          echo ${{ github.ref }}
+          echo ${{ github.base_ref }}
+        
       - uses: actions/checkout@v2
       - name: Bump minor version and push tag
         if: startsWith(github.ref, 'refs/heads/feature/')
