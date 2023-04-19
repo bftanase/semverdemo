@@ -1,5 +1,5 @@
 name: Test workflows
-# xxx c
+# xxx XX
 on:
   push:
     branches:
