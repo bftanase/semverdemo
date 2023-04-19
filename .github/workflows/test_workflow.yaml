@@ -12,3 +12,11 @@ jobs:
       - uses: actions/checkout@v3
       - name: Write a step summary
         run: echo "*My test*" >> $GITHUB_STEP_SUMMARY
+
+  apply-db-migrations:
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - uses: actions/checkout@v3
+      - name: pretend to do something
+        run: echo "I would apply some migration"
