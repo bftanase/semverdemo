@@ -1,0 +1,14 @@
+name: Test workflows
+
+on:
+  push:
+    branches:
+      - 'master'
+      
+ jobs:
+  check-db-migrations:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Write a step summary
+        run: echo "*My test*" >> $GITHUB_STEP_SUMMARY
