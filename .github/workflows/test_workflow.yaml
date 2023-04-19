@@ -3,7 +3,7 @@ name: Test workflows
 on:
   push:
     branches:
-      - 'master'
+      - 'main'
       
 jobs:
   check-db-migrations:
