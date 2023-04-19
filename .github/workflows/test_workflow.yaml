@@ -16,6 +16,7 @@ jobs:
   apply-db-migrations:
     runs-on: ubuntu-latest
     environment: production
+    needs: check-db-migrations
     steps:
       - uses: actions/checkout@v3
       - name: pretend to do something
