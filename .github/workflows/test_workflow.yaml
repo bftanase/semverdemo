@@ -5,7 +5,7 @@ on:
     branches:
       - 'master'
       
- jobs:
+jobs:
   check-db-migrations:
     runs-on: ubuntu-latest
     steps:
